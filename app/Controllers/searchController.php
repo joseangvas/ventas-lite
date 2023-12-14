@@ -66,3 +66,32 @@
 
 			return json_encode($alerta);
 		}
+
+
+    /*----------  Controlador eliminar busqueda  ----------*/
+    public function eliminarBuscadorControlador(){
+
+    $url=$this->limpiarCadena($_POST['modulo_url']);
+
+    if($this->modulosBusquedaControlador($url)){
+        $alerta=[
+            "tipo"=>"simple",
+            "titulo"=>"Ocurrió un error inesperado",
+            "texto"=>"No podemos procesar la petición en este momento",
+            "icono"=>"error"
+        ];
+        return json_encode($alerta);
+        exit();
+    }
+
+    unset($_SESSION[$url]);
+
+    $alerta=[
+        "tipo"=>"redireccionar",
+        "url"=>APP_URL.$url."/"
+    ];
+
+    return json_encode($alerta);
+}
+
+}
