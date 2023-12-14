@@ -228,7 +228,7 @@
 					"tipo"=>"simple",
 					"titulo"=>"Ocurrió un error inesperado",
 					"texto"=>"No podemos actualizar la cantidad de productos debido a que faltan algunos parámetros de configuración",
-                    "icono"=>"error"
+					"icono"=>"error"
 				];
 				return json_encode($alerta);
 		        exit();
@@ -567,6 +567,8 @@
 
             $total_caja=$datos_caja['caja_efectivo']+$movimiento_cantidad;
             $total_caja=number_format($total_caja,MONEDA_DECIMALES,'.','');
+
+
             /*== Actualizando productos ==*/
             $errores_productos=0;
 			foreach($_SESSION['datos_producto_venta'] as $productos){
