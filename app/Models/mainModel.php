@@ -58,6 +58,8 @@
                 return true;
             }
 		}
+
+
 		/*----------  Funcion para ejecutar una consulta INSERT preparada  ----------*/
 		protected function guardarDatos($tabla,$datos){
 
@@ -109,7 +111,46 @@
 
             return $sql;
 		}
-        
+
+
+		/*----------  Funcion para ejecutar una consulta UPDATE preparada  ----------*/
+		protected function actualizarDatos($tabla,$datos,$condicion){
+
+			$query="UPDATE $tabla SET ";
+
+			$C=0;
+			foreach ($datos as $clave){
+				if($C>=1){ $query.=","; }
+				$query.=$clave["campo_nombre"]."=".$clave["campo_marcador"];
+				$C++;
+			}
+
+			$query.=" WHERE ".$condicion["condicion_campo"]."=".$condicion["condicion_marcador"];
+
+			$sql=$this->conectar()->prepare($query);
+
+			foreach ($datos as $clave){
+				$sql->bindParam($clave["campo_marcador"],$clave["campo_valor"]);
+			}
+
+			$sql->bindParam($condicion["condicion_marcador"],$condicion["condicion_valor"]);
+
+			$sql->execute();
+
+			return $sql;
+		}
+
+
+		/*---------- Funcion eliminar registro ----------*/
+        protected function eliminarRegistro($tabla,$campo,$id){
+            $sql=$this->conectar()->prepare("DELETE FROM $tabla WHERE $campo=:id");
+            $sql->bindParam(":id",$id);
+            $sql->execute();
+            
+            return $sql;
+        }
+
+
 		/*---------- Paginador de tablas ----------*/
 		protected function paginadorTablas($pagina,$numeroPaginas,$url,$botones){
 	        $tabla='<nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination">';
@@ -163,3 +204,56 @@
 	        $tabla.='</nav>';
 	        return $tabla;
 	    }
+
+
+	    /*----------  Funcion generar select ----------*/
+		public function generarSelect($datos,$campo_db){
+			$check_select='';
+			$text_select='';
+			$count_select=1;
+			$select='';
+			foreach($datos as $row){
+
+				if($campo_db==$row){
+					$check_select='selected=""';
+					$text_select=' (Actual)';
+				}
+
+				$select.='<option value="'.$row.'" '.$check_select.'>'.$count_select.' - '.$row.$text_select.'</option>';
+
+				$check_select='';
+				$text_select='';
+				$count_select++;
+			}
+			return $select;
+		}
+
+		/*----------  Funcion generar codigos aleatorios  ----------*/
+		protected function generarCodigoAleatorio($longitud,$correlativo){
+			$codigo="";
+			$caracter="Letra";
+			for($i=1; $i<=$longitud; $i++){
+				if($caracter=="Letra"){
+					$letra_aleatoria=chr(rand(ord("a"),ord("z")));
+					$letra_aleatoria=strtoupper($letra_aleatoria);
+					$codigo.=$letra_aleatoria;
+					$caracter="Numero";
+				}else{
+					$numero_aleatorio=rand(0,9);
+					$codigo.=$numero_aleatorio;
+					$caracter="Letra";
+				}
+			}
+			return $codigo."-".$correlativo;
+		}
+
+
+		/*----------  Limitar cadenas de texto  ----------*/
+		public function limitarCadena($cadena,$limite,$sufijo){
+			if(strlen($cadena)>$limite){
+				return substr($cadena,0,$limite).$sufijo;
+			}else{
+				return $cadena;
+			}
+		}
+	}
