@@ -14,7 +14,6 @@
 		private $user=DB_USER;
 		private $pass=DB_PASS;
 
-
 		/*----------  Funcion conectar a BD  ----------*/
 		protected function conectar(){
 			$conexion = new PDO("mysql:host=".$this->server.";dbname=".$this->db,$this->user,$this->pass);
@@ -22,14 +21,12 @@
 			return $conexion;
 		}
 
-
 		/*----------  Funcion ejecutar consultas  ----------*/
 		protected function ejecutarConsulta($consulta){
 			$sql=$this->conectar()->prepare($consulta);
 			$sql->execute();
 			return $sql;
 		}
-
 
 		/*----------  Funcion limpiar cadenas  ----------*/
 		public function limpiarCadena($cadena){
@@ -49,7 +46,6 @@
 			return $cadena;
 		}
 
-
 		/*---------- Funcion verificar datos (expresion regular) ----------*/
 		protected function verificarDatos($filtro,$cadena){
 			if(preg_match("/^".$filtro."$/", $cadena)){
@@ -58,7 +54,6 @@
                 return true;
             }
 		}
-
 
 		/*----------  Funcion para ejecutar una consulta INSERT preparada  ----------*/
 		protected function guardarDatos($tabla,$datos){
@@ -93,7 +88,6 @@
 			return $sql;
 		}
 
-
 		/*---------- Funcion seleccionar datos ----------*/
         public function seleccionarDatos($tipo,$tabla,$campo,$id){
 			$tipo=$this->limpiarCadena($tipo);
@@ -111,7 +105,6 @@
 
             return $sql;
 		}
-
 
 		/*----------  Funcion para ejecutar una consulta UPDATE preparada  ----------*/
 		protected function actualizarDatos($tabla,$datos,$condicion){
@@ -140,7 +133,6 @@
 			return $sql;
 		}
 
-
 		/*---------- Funcion eliminar registro ----------*/
         protected function eliminarRegistro($tabla,$campo,$id){
             $sql=$this->conectar()->prepare("DELETE FROM $tabla WHERE $campo=:id");
@@ -149,7 +141,6 @@
             
             return $sql;
         }
-
 
 		/*---------- Paginador de tablas ----------*/
 		protected function paginadorTablas($pagina,$numeroPaginas,$url,$botones){
@@ -204,7 +195,6 @@
 	        $tabla.='</nav>';
 	        return $tabla;
 	    }
-
 
 	    /*----------  Funcion generar select ----------*/
 		public function generarSelect($datos,$campo_db){
