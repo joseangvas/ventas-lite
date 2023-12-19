@@ -36,3 +36,9 @@ del servidor. El archivo se encuentra en la carpeta "config"
 su empresa y servidor. El archivo se encuentra en la carpeta "config"
 
 APP_NAME -> El nombre de su empresa u organización
+
+APP_URL -> La direcciÓn URL de su servidor local (http://localhost:3000/) o remoto (https://midominio/ventas-lite/). 
+Importante no olvide colocar en la URL si es http o https 
+
+5 - Usuario por defecto: Administrador
+    Clave: Administrador
