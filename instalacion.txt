@@ -10,3 +10,8 @@ the server data. The file is in the "config" folder
 
 4 - Open the app.php file with your favorite code editor, then configure it according 
 to your company and server. The file is in the "config" folder
+
+APP_NAME -> The name of your company or organization
+
+APP_URL -> The URL of your local (http://localhost/VENTAS/) or remote server (https://mydomain/VENTAS/). 
+Important do not forget to place in the URL if it is http or https
