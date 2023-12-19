@@ -18,4 +18,13 @@ Important do not forget to place in the URL if it is http or https
 
 5 - Default user: Administrador
     Password: Administrador
-    
+
+
+
+=== ESPAÑOL ===
+
+1 - Copie o mueva la carpeta VENTAS a su servidor local o remoto
+
+2 - Cree una base de datos en MYSQL con el nombre de su preferencia, 
+selecciónela e importe la base de datos del sistema con phpmyadmin u otro gestor grafico de MYSQL 
+que utilice, la base de datos se encuentra en la carpeta DB
