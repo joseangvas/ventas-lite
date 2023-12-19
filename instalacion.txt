@@ -28,3 +28,11 @@ Important do not forget to place in the URL if it is http or https
 2 - Cree una base de datos en MYSQL con el nombre de su preferencia, 
 selecciónela e importe la base de datos del sistema con phpmyadmin u otro gestor grafico de MYSQL 
 que utilice, la base de datos se encuentra en la carpeta DB
+
+3 - Abra el archivo server.php con su editor de código favorito y configure solamente los datos 
+del servidor. El archivo se encuentra en la carpeta "config"
+
+4 - Abra el archivo app.php con su editor de código favorito, a continuación configúrelo según 
+su empresa y servidor. El archivo se encuentra en la carpeta "config"
+
+APP_NAME -> El nombre de su empresa u organización
